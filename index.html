@@ -9,73 +9,78 @@
       padding: 2rem;
       max-width: 600px;
       margin: auto;
-      background: #fefefe;
+      background: #fff0f5;
+    }
+    h2 {
+      text-align: center;
+      color: #8b0000;
     }
     input, button {
       padding: 10px;
       margin-top: 1rem;
       width: 100%;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #8b0000;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #a30000;
     }
     .result {
-      margin-top: 1rem;
-      font-size: 1.1rem;
+      margin-top: 2rem;
+      font-size: 1.2rem;
       font-weight: bold;
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
   <h2>Welcome to the Wedding of [Bride] & [Groom]</h2>
-  <p>Please enter your full name to check your invitation status:</p>
+  <p>Please enter your full name below to check if you're invited:</p>
 
   <input type="text" id="guestName" placeholder="Enter your full name">
   <button onclick="checkGuest()">Check Invitation</button>
 
   <div class="result" id="result"></div>
 
- <script>
-  const guestList = {
-    "ana santos": { table: 1, chair: 3 },
-    "mark reyes": { table: 2, chair: 5 },
-    "liza dela cruz": { table: 3, chair: 1 }
-    // Add more guests in lowercase
-  };
-
-  function checkGuest() {
-    const nameInput = document.getElementById("guestName").value.trim().toLowerCase();
-    const result = document.getElementById("result");
-
-    if (guestList[nameInput]) {
-      const { table, chair } = guestList[nameInput];
-      result.innerHTML = Welcome, <strong>${capitalizeName(nameInput)}</strong>!<br>
-                          Your seat is at <strong>Table ${table}</strong>, Chair <strong>${chair}</strong>.;
-      result.style.color = "green";
-    } else {
-      result.innerHTML = You're not on the guest list.<br>
-                          Please ask one of the bride's sisters for assistance.;
-      result.style.color = "red";
-    }
-  }
-
-  function capitalizeName(name) {
-    return name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
-  }
-</script>
+  <script>
+    const guestList = {
+      "ana santos": { table: 1, chair: 3 },
+      "mark reyes": { table: 2, chair: 5 },
+      "liza dela cruz": { table: 3, chair: 1 }
+      // Add more guests in lowercase like:
+      // "juan dela cruz": { table: 4, chair: 2 }
+    };
 
     function checkGuest() {
-      const nameInput = document.getElementById("guestName").value.trim();
+      const nameInput = document.getElementById("guestName").value.trim().toLowerCase();
       const result = document.getElementById("result");
 
       if (guestList[nameInput]) {
         const { table, chair } = guestList[nameInput];
-        result.innerHTML = Welcome, <strong>${nameInput}</strong>!<br>
-                            Your seat is at <strong>Table ${table}</strong>, Chair <strong>${chair}</strong>.;
-        result.style.color = "green";
+        result.innerHTML = 
+          <span style="color: green;">
+            You are invited, <strong>${capitalizeName(nameInput)}</strong>!<br>
+            Please proceed to <strong>Table ${table}</strong>, Chair <strong>${chair}</strong>.
+          </span>
+        ;
       } else {
-        result.innerHTML = You're not on the guest list.<br>
-                            Please ask one of the bride's sisters for assistance.;
-        result.style.color = "red";
+        result.innerHTML = 
+          <span style="color: red;">
+            You are not on the guest list.<br>
+            Try asking for the wedding coordinators' assistance.
+          </span>
+        ;
       }
+    }
+
+    function capitalizeName(name) {
+      return name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
     }
   </script>
 
