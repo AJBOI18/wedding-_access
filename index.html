@@ -33,13 +33,34 @@
 
   <div class="result" id="result"></div>
 
-  <script>
-    const guestList = {
-      "Ana Santos": { table: 1, chair: 3 },
-      "Mark Reyes": { table: 2, chair: 5 },
-      "Liza Dela Cruz": { table: 3, chair: 1 },
-      // Add more guests here
-    };
+ <script>
+  const guestList = {
+    "ana santos": { table: 1, chair: 3 },
+    "mark reyes": { table: 2, chair: 5 },
+    "liza dela cruz": { table: 3, chair: 1 }
+    // Add more guests in lowercase
+  };
+
+  function checkGuest() {
+    const nameInput = document.getElementById("guestName").value.trim().toLowerCase();
+    const result = document.getElementById("result");
+
+    if (guestList[nameInput]) {
+      const { table, chair } = guestList[nameInput];
+      result.innerHTML = Welcome, <strong>${capitalizeName(nameInput)}</strong>!<br>
+                          Your seat is at <strong>Table ${table}</strong>, Chair <strong>${chair}</strong>.;
+      result.style.color = "green";
+    } else {
+      result.innerHTML = You're not on the guest list.<br>
+                          Please ask one of the bride's sisters for assistance.;
+      result.style.color = "red";
+    }
+  }
+
+  function capitalizeName(name) {
+    return name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+  }
+</script>
 
     function checkGuest() {
       const nameInput = document.getElementById("guestName").value.trim();
